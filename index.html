@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Jaladrea Dc Abraham — Pronosticador</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#ffd369">
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("./service-worker.js");
+    }
+  </script>
+</head>
+<body>
+  <div class="app">
+    <header style="text-align:center; margin-bottom:12px;">
+      <h1>Jaladrea Dc Abraham</h1>
+      <p>Pronosticador · Charada · Adversarios · Resultados</p>
+    </header>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="historial">Historial</button>
+      <button class="tab-btn" data-tab="generador">Pronóstico</button>
+      <button class="tab-btn" data-tab="charada">Charada</button>
+      <button class="tab-btn" data-tab="adversarios">Adversarios</button>
+      <button class="tab-btn" data-tab="resultados">Resultados</button>
+    </div>
+
+    <section id="historial" class="tab-content active">
+      <h2>Historial de Sorteos</h2>
+      <div id="history-list" class="result-box">
+        <div class="list-item">Cargando historial…</div>
+      </div>
+    </section>
+
+    <section id="generador" class="tab-content">
+      <h2>Generador de Pronósticos</h2>
+      <input id="pyramid-input" type="text" placeholder="Ej: 125687" />
+      <button id="btn-pyramid">Generar Pirámide</button>
+      <button id="btn-gen">Generar Pronóstico</button>
+      <div id="gen-result" class="result-box"></div>
+      <pre id="pyramid-result" class="pyramid result-box"></pre>
+    </section>
+
+    <section id="charada" class="tab-content">
+      <h2>Charada completa (00–99)</h2>
+      <input id="charada-search" type="text" placeholder="Busca número o palabra clave" />
+      <div id="charada-result" class="result-box"></div>
+    </section>
+
+    <section id="adversarios" class="tab-content">
+      <h2>Adversarios</h2>
+      <input id="adversarios-search" type="text" placeholder="Escribe un número (00-99)" />
+      <div id="adversarios-list" class="result-box"></div>
+    </section>
+
+    <section id="resultados" class="tab-content">
+      <h2>Resultados diarios</h2>
+      <div id="results-georgia" class="result-box"></div>
+      <div id="results-florida" class="result-box"></div>
+      <div id="results-americana" class="result-box"></div>
+    </section>
+
+    <footer>© Jaladrea Dc Abraham</footer>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

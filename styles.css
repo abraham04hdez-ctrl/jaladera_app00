@@ -1,0 +1,9 @@
+body {font-family:Poppins,Arial,sans-serif;background:#1d1f27;color:#f5f5f5;margin:0;padding:0}
+.app{max-width:900px;margin:auto;padding:16px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.tab-btn{background:#2f3244;color:#eee;border:1px solid #444;padding:8px 14px;border-radius:8px;cursor:pointer;font-weight:600}
+.tab-btn.active{background:#ffd369;color:#222}
+.tab-content{display:none;background:#2f3244;padding:16px;border-radius:12px}
+.tab-content.active{display:block}
+.result-box{background:#1e202a;border:1px solid #444;border-radius:10px;padding:12px;margin-top:6px;min-height:40px}
+.pyramid{font-family:Courier New,monospace;background:#111;color:#f0f0f0;padding:10px}
