@@ -1,0 +1,105 @@
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+  });
+});<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Jaladrea Dc Abraham — Pronosticador</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#ffd369">
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("./service-worker.js");
+    }
+  </script>
+</head>
+<body>
+  <div class="app">
+    <header style="text-align:center; margin-bottom:12px;">
+      <h1>Jaladrea Dc Abraham</h1>
+      <p>Pronosticador · Charada · Adversarios · Resultados</p>
+    </header>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="historial">Historial</button>
+      <button class="tab-btn" data-tab="generador">Pronóstico</button>
+      <button class="tab-btn" data-tab="charada">Charada</button>
+      <button class="tab-btn" data-tab="adversarios">Adversarios</button>
+      <button class="tab-btn" data-tab="resultados">Resultados</button>
+    </div>
+
+    <section id="historial" class="tab-content active">
+      <h2>Historial de Sorteos</h2>
+      <div id="history-list" class="result-box">
+        <div class="list-item">Cargando historial…</div>
+      </div>
+    </section>
+
+    <section id="generador" class="tab-content">
+      <h2>Generador de Pronósticos</h2>
+      <input id="pyramid-input" type="text" placeholder="Ej: 125687" />
+      <button id="btn-pyramid">Generar Pirámide</button>
+      <button id="btn-gen">Generar Pronóstico</button>
+      <div id="gen-result" class="result-box"></div>
+      <pre id="pyramid-result" class="pyramid result-box"></pre>
+    </section>
+
+    <section id="charada" class="tab-content">
+      <h2>Charada completa (00–99)</h2>
+      <input id="charada-search" type="text" placeholder="Busca número o palabra clave" />
+      <div id="charada-result" class="result-box"></div>
+    </section>
+
+    <section id="adversarios" class="tab-content">
+      <h2>Adversarios</h2>
+      <input id="adversarios-search" type="text" placeholder="Escribe un número (00-99)" />
+      <div id="adversarios-list" class="result-box"></div>
+    </section>
+
+    <section id="resultados" class="tab-content">
+      <h2>Resultados diarios</h2>
+      <div id="results-georgia" class="result-box"></div>
+      <div id="results-florida" class="result-box"></div>
+      <div id="results-americana" class="result-box"></div>
+    </section>
+
+    <footer>© Jaladrea Dc Abraham</footer>
+  </div>
+  <script src="app.js"></script>
+</body>{
+  "name": "Jaladrea Dc Abraham",
+  "short_name": "Jaladrea",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#1d1f27",
+  "theme_color": "#ffd369",
+  "orientation": "portrait",
+  "icons": [
+    {"src":"icon-192.png","sizes":"192x192","type":"image/png"},
+    {"src":"icon-512.png","sizes":"512x512","type":"image/png"}
+  ]
+}
+</html>
+self.addEventListener("install", e=>{
+  e.waitUntil(caches.open("jaladrea-cache").then(c=>c.addAll([
+    "./","./index.html","./styles.css","./app.js","./manifest.json"
+  ])));
+});
+self.addEventListener("fetch", e=>{
+  e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)));
+});body {font-family:Poppins,Arial,sans-serif;background:#1d1f27;color:#f5f5f5;margin:0;padding:0}
+.app{max-width:900px;margin:auto;padding:16px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.tab-btn{background:#2f3244;color:#eee;border:1px solid #444;padding:8px 14px;border-radius:8px;cursor:pointer;font-weight:600}
+.tab-btn.active{background:#ffd369;color:#222}
+.tab-content{display:none;background:#2f3244;padding:16px;border-radius:12px}
+.tab-content.active{display:block}
+.result-box{background:#1e202a;border:1px solid #444;border-radius:10px;padding:12px;margin-top:6px;min-height:40px}
+.pyramid{font-family:Courier New,monospace;background:#111;color:#f0f0f0;padding:10px}
